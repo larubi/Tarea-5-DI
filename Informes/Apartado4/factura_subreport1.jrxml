@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7ce822ef-a49c-4d89-a07f-5fbb12969726">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+DO.ID AS NUM_FACTURA,
+PR.NAME AS NOM_PRODUCTO,
+PR.COST AS PRECIO,
+PO.QUANTITY AS CANTIDAD_PROD,
+PO.QUANTITY * PR.COST AS TOTAL
+
+FROM
+PRODUCT PR,
+POSITIONS PO,
+DOCUMENT DO
+
+WHERE
+PR.ID = PO.PRODUCTID AND
+PO.DOCUMENTID = DO.ID AND
+PO.DOCUMENTID = $P{ID}
+
+ORDER BY
+NUM_FACTURA]]>
+	</queryString>
+	<field name="NUM_FACTURA" class="java.lang.Integer"/>
+	<field name="NOM_PRODUCTO" class="java.lang.String"/>
+	<field name="PRECIO" class="java.math.BigDecimal"/>
+	<field name="CANTIDAD_PROD" class="java.lang.Integer"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="0" width="100" height="20" uuid="73453ba7-5771-4850-a5be-ef9612008f02"/>
+				<text><![CDATA[NUMERO FACTURA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="21" width="100" height="20" uuid="34d60864-5910-4d61-944e-0f63e7d79197"/>
+				<text><![CDATA[NOM_PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="21" width="100" height="20" uuid="f582d2dd-311d-4d96-b902-19912af48887"/>
+				<text><![CDATA[PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="21" width="100" height="20" uuid="e79d0a3d-d829-4443-8947-e136708962cc"/>
+				<text><![CDATA[CANTIDAD_PROD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="20" width="100" height="20" uuid="16a72d8d-8684-4656-8f5c-a3f41a381072"/>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="121" y="0" width="100" height="20" uuid="518eef7a-c953-4603-93dd-6c9fadc147d1"/>
+				<textFieldExpression><![CDATA[$F{NUM_FACTURA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="0" width="118" height="20" uuid="525937e2-e191-4f79-81bc-5de858eb32a7"/>
+				<textFieldExpression><![CDATA[$F{NOM_PRODUCTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="0" width="117" height="20" uuid="290ccda7-31af-4376-a184-17cefc8487ec"/>
+				<textFieldExpression><![CDATA[$F{CANTIDAD_PROD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="102" height="20" uuid="94219f8e-bde0-48cf-a5af-f57bd76b804a"/>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="123" height="20" uuid="959bd534-a6f3-4779-a3d8-7283f0d7dd30"/>
+				<textFieldExpression><![CDATA[$F{PRECIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

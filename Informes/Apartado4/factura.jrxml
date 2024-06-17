@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b7f2b43-9b26-4723-bea4-36d8bf4e83ff">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\rocio\\OneDrive\\Documentos\\NetBeansProjects\\IDTarea5\\Informes\\Apartado4\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+ID,
+FIRSTNAME AS NOMBRE,
+LASTNAME AS APELLIDO,
+STREET AS DIRECCION,
+CITY AS CIUDAD
+
+FROM
+ADDRESS]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="APELLIDO" class="java.lang.String"/>
+	<field name="DIRECCION" class="java.lang.String"/>
+	<field name="CIUDAD" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement x="205" y="24" width="100" height="20" uuid="99660bdb-70d2-4a14-80e7-b0e5e429c31f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APARTADO 4]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="252" splitType="Stretch">
+			<textField>
+				<reportElement x="71" y="10" width="100" height="20" uuid="c27edc06-220b-4d96-8f5d-1182b28c05a5"/>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="58" height="20" uuid="0f0dd8b2-3945-4a3b-9cc5-1bd59afa1753"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="258" y="10" width="100" height="20" uuid="0566486a-c2e4-45c9-80ef-09de30d3c6bc"/>
+				<textFieldExpression><![CDATA[$F{APELLIDO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="187" y="10" width="60" height="20" uuid="da17ec12-de56-42c3-9b7c-dbeae8b70965"/>
+				<text><![CDATA[APELLIDO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="38" width="100" height="20" uuid="f531c4a0-7150-4868-a94d-b67b390bcb03"/>
+				<textFieldExpression><![CDATA[$F{DIRECCION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="38" width="71" height="20" uuid="1d21f888-b1ae-4cc3-975b-238b94735200"/>
+				<text><![CDATA[DIRECCION:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="258" y="38" width="100" height="20" uuid="9cfc9f1a-c544-4dae-a797-4f81d0c55e2a"/>
+				<textFieldExpression><![CDATA[$F{CIUDAD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="187" y="38" width="60" height="20" uuid="34048b49-d52b-4ea5-be01-24d0e97fb1a4"/>
+				<text><![CDATA[CIUDAD:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="122" width="513" height="100" uuid="1c27d772-0ad5-425d-8302-1fa81f60ec85"/>
+				<subreportParameter name="ID">
+					<subreportParameterExpression><![CDATA[$F{ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "factura_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

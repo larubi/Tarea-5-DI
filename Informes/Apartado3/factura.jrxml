@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="506b9875-6ab5-422c-b583-b83c9b8b3e80">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+PR.NAME AS PRODUCT_NAME,
+sum(PO.QUANTITY) AS VENTAS_TOTALES
+
+FROM
+PRODUCT PR,
+POSITIONS PO
+
+WHERE
+PR.ID = PO.PRODUCTID
+
+GROUP BY
+PRODUCT_NAME]]>
+	</queryString>
+	<field name="PRODUCT_NAME" class="java.lang.String"/>
+	<field name="VENTAS_TOTALES" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="202" y="28" width="100" height="20" uuid="3579cc00-1f7a-4707-b3ff-8a7502253a74"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APARTADO 3]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="12" width="100" height="20" uuid="b2303eb8-d6d6-4cd7-bac7-13994c348894"/>
+				<text><![CDATA[PRODUCT_NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="12" width="100" height="20" uuid="aca3248d-bee3-40d0-acb7-1cc71728f81e"/>
+				<text><![CDATA[VENTAS_TOTALES]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="16" y="0" width="129" height="20" uuid="d36e7b24-98e6-4aa5-a6dd-2ddefd1496da"/>
+				<textFieldExpression><![CDATA[$F{PRODUCT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="0" width="163" height="20" uuid="42893f29-a850-4f1b-a9f9-a3c7209bbbbc"/>
+				<textFieldExpression><![CDATA[$F{VENTAS_TOTALES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="260" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="260" uuid="04990de1-7f5c-4260-af9e-b4e114270034"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Total de productos"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{PRODUCT_NAME}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{VENTAS_TOTALES}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot labelRotation="-45.0"/>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="-45.0">
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>
